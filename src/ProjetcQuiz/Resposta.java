@@ -7,7 +7,7 @@ public class Resposta {
 	private boolean acertou;
 	private int pontuacaoPergunta;
 	
-	void VerificarResposta(Pergunta pergunta, int alternativa){
+	public void VerificarResposta(Pergunta pergunta, int alternativa){
 		Alternativa resp = pergunta.getAlternativas(alternativa);
 		this.acertou = resp.getCorreta();
 	}
