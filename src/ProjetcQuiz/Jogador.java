@@ -1,5 +1,7 @@
 package ProjetcQuiz;
 
+import java.time.LocalDateTime;
+
 public class Jogador {
 
 	private String nickname;
@@ -7,6 +9,8 @@ public class Jogador {
 	private int pontuacaoFinal;
 
 	private int acertos;
+	
+	private LocalDateTime data;
 
 	public void contadorAcertos(boolean acerto) {
 		if (acerto == true) {
@@ -16,6 +20,8 @@ public class Jogador {
 
 	public int escolherResposta(char resposta) {
 		switch (resposta) {
+		case 'P'|'p':
+			return 0;
 		case 'A'|'a':
 			return 1;
 		case 'B'|'b':
@@ -51,6 +57,14 @@ public class Jogador {
 
 	public void setAcertos(int acertos) {
 		this.acertos = acertos;
+	}
+	
+	public LocalDateTime getData() {
+		return data;
+	}
+
+	public void setData(LocalDateTime data) {
+		this.data = data;
 	}
 
 }
