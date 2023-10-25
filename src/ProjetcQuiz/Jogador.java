@@ -33,6 +33,7 @@ public class Jogador {
 		default:
 			System.out.println("Opção inválida! Digite uma das alternativas!");
 		}
+		return 0;
 	}
 
 	public String getNickname() {
