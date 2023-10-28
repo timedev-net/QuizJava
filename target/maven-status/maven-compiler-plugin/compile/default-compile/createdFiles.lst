@@ -1,0 +1,7 @@
+app\models\Pergunta.class
+app\repository\Repository.class
+app\models\Quiz.class
+app\models\Alternativa.class
+app\models\Jogador.class
+app\models\Resposta.class
+app\Game.class
