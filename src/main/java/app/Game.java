@@ -1,5 +1,6 @@
 package app;
 
+import app.enums.Dificuldade;
 import app.models.*;
 import app.repository.Repository;
 import java.io.IOException;
@@ -26,12 +27,12 @@ public class Game {
 
         GameQuiz.setListaPergunta(perguntas);
 
-//        byte respostas[] = new byte[perguntas.length];
+        byte respostas[] = new byte[perguntas.size()];
 
         apresentacao();
         limpatela();
         nickname = pegaNickname(sc);
-        
+
         Jogador player = new Jogador(nickname);
 
         //definições Jogador
@@ -45,7 +46,7 @@ public class Game {
                 + "1 - SIM\n"
                 + "2 - NÃO\n");
         byte EscolhaDif = sc.nextByte();
-        String dificuldade = "";
+
         if (EscolhaDif == 1) {
             System.out.println("1 - Fácil\n"
                     + "2 - Médio\n"
@@ -63,31 +64,27 @@ public class Game {
 
                 switch (dif) {
                     case 1:
-                        dificuldade = "Fácil";
+                        System.out.println("Dificuldade Selecionada: " + Dificuldade.FACIL);
+                        GameQuiz.SorteioPergunta(Dificuldade.FACIL);
                         break;
                     case 2:
-                        dificuldade = "Médio";
+                        System.out.println("Dificuldade Selecionada: " + Dificuldade.MEDIO);
+                        GameQuiz.SorteioPergunta(Dificuldade.MEDIO);
                         break;
                     case 3:
-                        dificuldade = "Difícil";
+                        System.out.println("Dificuldade Selecionada: " + Dificuldade.DIFICIL);
+                        GameQuiz.SorteioPergunta(Dificuldade.DIFICIL);
                         break;
                     default:
                         System.out.println("Opção inválida");
                         dif = -1;
                 }
             }
-            System.out.println("Dificuldade Selecionada: " + dificuldade);
-
+        } else {
+            respostas = GameQuiz.SorteioPergunta();
         }
 
         GameQuiz.setJogador(player);
-
-        if (dificuldade.equals("")) {
-            respostas = GameQuiz.SorteioPergunta();
-        } else {
-            respostas = GameQuiz.SorteioPergunta(dificuldade);
-        }
-
     }
 
     public static void apresentacao() {
@@ -107,25 +104,14 @@ public class Game {
             e.printStackTrace();
         }
     }
+
     public static void limpatela() {
-        try {
-            //Limpa a tela no windows, no linux e no MacOS
-        if (System.getProperty("os.name").contains("Windows"))
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-        else
-            Runtime.getRuntime().exec("clear");
-        
-//            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-//                    + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-//                    + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-//                    + "\n\n\n\n\n\n\n");
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+                + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+                + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+                + "\n\n\n\n\n\n\n");
     }
-    
+
     public static String pegaNickname(Scanner sc) {
         System.out.println("Vamos começar, mas informe seu Nickname: ");
 
@@ -140,7 +126,6 @@ public class Game {
         }
         return nickname;
     }
-    
 
     public static boolean verificarNickname(String nickname) {
         String proibicao = "!\"#$%&'()*+,./:;<=>?@[\\]^`{|}~";

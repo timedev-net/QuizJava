@@ -50,7 +50,7 @@ public class Pergunta {
                     System.out.print("D - ");
                     break;
             }
-            System.out.println(alternativas[numeroEscolhido].getDescricao());
+            System.out.println(alternativas.get(numeroEscolhido).getDescricao());
         }
     }
 
@@ -91,10 +91,10 @@ public class Pergunta {
     }
 
     public Alternativa getAlternativas(int pos) {
-        return alternativas[pos];
+        return alternativas.get(pos);
     }
 
-    public void setAlternativas(Alternativa[] alternativas) {
+    public void setAlternativas(List<Alternativa> alternativas) {
         this.alternativas = alternativas;
     }
 

@@ -1,5 +1,6 @@
 package app.models;
 
+import app.enums.Dificuldade;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -8,7 +9,7 @@ public class Quiz {
 
     public String nickname;
     private Jogador jogador;
-    private ArrayList<Pergunta> listaPergunta[];
+    private ArrayList<Pergunta> listaPergunta;
     private int taxaAcerto;
     private int taxaErro;
     private int tempoResposta;
@@ -16,47 +17,45 @@ public class Quiz {
 
     public byte[] SorteioPergunta() {
         ArrayList<Integer> indicesDisponiveis = new ArrayList<>();
-        byte resp[] = new byte[listaPergunta.length];
+        byte resp[] = new byte[listaPergunta.size()];
         Random sorteia = new Random();
         Integer numeroEscolhido;
         Scanner sc = new Scanner(System.in);
-        for (int i = 0; i < listaPergunta.length; ++i) {
+        for (int i = 0; i < listaPergunta.size(); ++i) {
             indicesDisponiveis.add(i);
         }
-        for (int i = 0; i < listaPergunta.length; ++i) {
+        for (int i = 0; i < listaPergunta.size(); ++i) {
             numeroEscolhido = (Integer) sorteia.nextInt(indicesDisponiveis.size());
             numeroEscolhido = indicesDisponiveis.get(numeroEscolhido);
             indicesDisponiveis.remove(numeroEscolhido);
-            System.out.println(listaPergunta[numeroEscolhido].getTitulo());
-            listaPergunta[numeroEscolhido].EmbaralharAlternativas();
+            System.out.println(listaPergunta.get(numeroEscolhido).getTitulo());
+            listaPergunta.get(numeroEscolhido).EmbaralharAlternativas();
             char respC = sc.next().charAt(0);
             resp[i] = (byte) jogador.escolherResposta(respC);
-
         }
         return resp;
     }
 
-    public byte[] SorteioPergunta(String dif) {
+    public byte[] SorteioPergunta(Dificuldade dif) {
         ArrayList<Integer> indicesDisponiveis = new ArrayList<>();
         Random sorteia = new Random();
         Integer numeroEscolhido;
         Scanner sc = new Scanner(System.in);
-        for (int i = 0; i < listaPergunta.length; ++i) {
-            if (dif.equals(listaPergunta[i].getDificuldade())) {
+        for (int i = 0; i < listaPergunta.size(); ++i) {
+            if (dif.equals(listaPergunta.get(i).getDificuldade())) {
                 indicesDisponiveis.add(i);
             }
         }
         // Variavel de retorno das resposatas para c�lculo
-        byte resp[] = new byte[listaPergunta.length - (listaPergunta.length - indicesDisponiveis.size())];
-        for (int i = 0; i < listaPergunta.length - (listaPergunta.length - indicesDisponiveis.size()); ++i) {
+        byte resp[] = new byte[listaPergunta.size() - (listaPergunta.size() - indicesDisponiveis.size())];
+        for (int i = 0; i < listaPergunta.size() - (listaPergunta.size() - indicesDisponiveis.size()); ++i) {
             numeroEscolhido = (Integer) sorteia.nextInt(indicesDisponiveis.size());
             numeroEscolhido = indicesDisponiveis.get(numeroEscolhido);
             indicesDisponiveis.remove(numeroEscolhido);
-            System.out.println(listaPergunta[numeroEscolhido].getTitulo());
-            listaPergunta[numeroEscolhido].EmbaralharAlternativas();
+            System.out.println(listaPergunta.get(numeroEscolhido).getTitulo());
+            listaPergunta.get(numeroEscolhido).EmbaralharAlternativas();
             char respC = sc.next().charAt(0);
             resp[i] = (byte) jogador.escolherResposta(respC);
-
         }
         return resp;
     }

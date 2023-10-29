@@ -5,3 +5,4 @@ app\models\Alternativa.class
 app\models\Jogador.class
 app\models\Resposta.class
 app\Game.class
+app\enums\Dificuldade.class
