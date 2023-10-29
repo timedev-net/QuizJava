@@ -1,24 +1,34 @@
 package app.models;
 
 public class Alternativa {
-	
-	private String Descricao;
-	private boolean correta;
 
-	public String getDescricao() {
-		return Descricao;
-	}
+    private String descricao;
+    private boolean correta = false;
+    
+    public Alternativa(String descricao) {
+        this.descricao = descricao;
+    }
+  
+    public Alternativa(String descricao, boolean value) {
+        this.descricao = descricao;
+        this.correta = value;
+    }
+    
+    public String getDescricao() {
+        return descricao;
+    }
 
-	public boolean getCorreta() {
-		return correta;
-	}
+    public boolean getCorreta() {
+        return correta;
+    }
 
-	public void setDescricao(String descricao) {
-		Descricao = descricao;
-	}
+    public Alternativa setDescricao(String descricao) {
+        this.descricao = descricao;
+        return this;
+    }
 
-	public void setCorreta(boolean correta) {
-		this.correta = correta;
-	}
+    public void setCorreta(boolean value) {
+        this.correta = value;
+    }
 
 }

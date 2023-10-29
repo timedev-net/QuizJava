@@ -2,9 +2,13 @@ package app;
 
 import app.models.*;
 import app.repository.Repository;
+import java.io.IOException;
 import java.util.Scanner;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Game {
 
@@ -15,49 +19,22 @@ public class Game {
 
         //Criando todos os Atributos para o Quiz
         Quiz GameQuiz = new Quiz();
-        
+
         // Pega a lista de perguntas do repositório
         Repository repo = new Repository();
-        Pergunta[] listaPergunta = repo.getList();
-        
-        GameQuiz.setListaPergunta(listaPergunta);
+        ArrayList<Pergunta> perguntas = repo.getPerguntas();
 
-        byte respostas[] = new byte[listaPergunta.length];
+        GameQuiz.setListaPergunta(perguntas);
 
-        System.out.print("\n\n\t\t Bem Vindo ao QuizJava \n \n"
-                + ""
-                + "\tFeito por:\n"
-                + ""
-                + "\tEinstain Duarti\n"
-                + "\tJosé Claion\n"
-                + "\tLeander Batista\n"
-                + "\tMatheus pantoja\n"
-                + "\n\t\t Divirta-se :D\n");
+//        byte respostas[] = new byte[perguntas.length];
 
-        try {
-            // Coloque o n�mero de milissegundos que deseja esperar dentro do m�todo sleep
-            Thread.sleep(5000); // 5000 milissegundos = 5 segundos
-        } catch (InterruptedException e) {
-            // Trate a exce��o se a thread for interrompida enquanto estiver dormindo
-            e.printStackTrace();
-        }
+        apresentacao();
         limpatela();
-
-        System.out.println("Vamos começar, mas informe seu Nickname: ");
-
-        nickname = sc.next();
-        boolean aprovado = verificarNickname(nickname);
-
-        while (aprovado == true) {
-            System.out.println("Ops... Você digitou um nome com símbolos da lista de proibição"
-                    + "\n tente novamente: ");
-            nickname = sc.next();
-            aprovado = verificarNickname(nickname);
-        }
-
+        nickname = pegaNickname(sc);
+        
         Jogador player = new Jogador(nickname);
 
-        //defini��es Jogador
+        //definições Jogador
         LocalDate dt_Jogo = LocalDate.now();
         player.setData(dt_Jogo);
 
@@ -113,12 +90,57 @@ public class Game {
 
     }
 
-    public static void limpatela() {
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-                + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-                + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-                + "\n\n\n\n\n\n\n");
+    public static void apresentacao() {
+        System.out.print("\n\n\t\t Bem Vindo ao QuizJava \n \n"
+                + ""
+                + "\tFeito por:\n"
+                + ""
+                + "\tEinstain Duarti\n"
+                + "\tJosé Claion\n"
+                + "\tLeander Batista\n"
+                + "\tMatheus pantoja\n"
+                + "\n\t\t Divirta-se :D\n");
+
+        try {
+            Thread.sleep(5000); // 5000 milissegundos = 5 segundos
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
+    public static void limpatela() {
+        try {
+            //Limpa a tela no windows, no linux e no MacOS
+        if (System.getProperty("os.name").contains("Windows"))
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        else
+            Runtime.getRuntime().exec("clear");
+        
+//            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+//                    + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+//                    + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+//                    + "\n\n\n\n\n\n\n");
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static String pegaNickname(Scanner sc) {
+        System.out.println("Vamos começar, mas informe seu Nickname: ");
+
+        String nickname = sc.next();
+        boolean aprovado = verificarNickname(nickname);
+
+        while (aprovado == true) {
+            System.out.println("Ops... Você digitou um nome com símbolos da lista de proibição"
+                    + "\n tente novamente: ");
+            nickname = sc.next();
+            aprovado = verificarNickname(nickname);
+        }
+        return nickname;
+    }
+    
 
     public static boolean verificarNickname(String nickname) {
         String proibicao = "!\"#$%&'()*+,./:;<=>?@[\\]^`{|}~";

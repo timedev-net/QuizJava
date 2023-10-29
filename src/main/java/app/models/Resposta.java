@@ -1,49 +1,48 @@
 package app.models;
 
 public class Resposta {
-	
-	private Jogador jogador;
-	private Pergunta pergunta;
-	private boolean acertou;
-	private int pontuacaoPergunta;
-	
-	public boolean VerificarResposta(Pergunta pergunta, int alternativa){
-		Alternativa resp = pergunta.getAlternativas(alternativa);
-		this.acertou = resp.getCorreta();
-		return resp.getCorreta();
-	}
 
-	public Jogador getJogador() {
-		return jogador;
-	}
+    private Jogador jogador;
+    private Pergunta pergunta;
+    private boolean acertou;
+    private int pontuacaoPergunta;
 
-	public void setJogador(Jogador jogador) {
-		this.jogador = jogador;
-	}
+    public boolean VerificarResposta(Pergunta pergunta, int alternativa) {
+        Alternativa resp = pergunta.getAlternativas(alternativa);
+        this.acertou = resp.getCorreta();
+        return resp.getCorreta();
+    }
 
-	public Pergunta getPergunta() {
-		return pergunta;
-	}
+    public Jogador getJogador() {
+        return jogador;
+    }
 
-	public void setPergunta(Pergunta pergunta) {
-		this.pergunta = pergunta;
-	}
+    public void setJogador(Jogador jogador) {
+        this.jogador = jogador;
+    }
 
-	public boolean getAcertou() {
-		return acertou;
-	}
+    public Pergunta getPergunta() {
+        return pergunta;
+    }
 
-	public void setAcertou(boolean acertou) {
-		this.acertou = acertou;
-	}
+    public void setPergunta(Pergunta pergunta) {
+        this.pergunta = pergunta;
+    }
 
-	public int getPontuacaoPergunta() {
-		return pontuacaoPergunta;
-	}
+    public boolean getAcertou() {
+        return acertou;
+    }
 
-	public void setPontuacaoPergunta(int pontuacaoPergunta) {
-		this.pontuacaoPergunta = pontuacaoPergunta;
-	}
-	
+    public void setAcertou(boolean acertou) {
+        this.acertou = acertou;
+    }
+
+    public int getPontuacaoPergunta() {
+        return pontuacaoPergunta;
+    }
+
+    public void setPontuacaoPergunta(int pontuacaoPergunta) {
+        this.pontuacaoPergunta = pontuacaoPergunta;
+    }
 
 }
