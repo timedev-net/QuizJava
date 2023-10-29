@@ -3,13 +3,10 @@ package app;
 import app.enums.Dificuldade;
 import app.models.*;
 import app.repository.Repository;
-import java.io.IOException;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Game {
 
