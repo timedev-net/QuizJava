@@ -30,5 +30,4 @@ public class Alternativa {
     public void setCorreta(boolean value) {
         this.correta = value;
     }
-
 }

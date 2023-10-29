@@ -2,6 +2,7 @@ package app.models;
 
 import app.enums.Dificuldade;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -13,13 +14,21 @@ public class Pergunta {
     private int pontuacao;
     private Dificuldade dificuldade;
 
-    public Pergunta(String titulo, Dificuldade dificuldade, List<Alternativa> alternativas) {
+    public Pergunta(String titulo, Dificuldade dificuldade) {
         this.titulo = titulo;
         this.dificuldade = dificuldade;
         if (dificuldade == Dificuldade.FACIL) this.pontuacao = 5;
         if (dificuldade == Dificuldade.MEDIO) this.pontuacao = 10;
         if (dificuldade == Dificuldade.DIFICIL) this.pontuacao = 15;
-        this.alternativas = alternativas;
+    }
+    
+    public Pergunta addAlternativa(String descricao) {
+        this.alternativas.add(new Alternativa(descricao));
+        return this;
+    }
+    public Pergunta addAlternativa(String descricao, boolean correta) {
+        this.alternativas.add(new Alternativa(descricao, correta));            
+        return this;
     }
 
     public void EmbaralharAlternativas() {
@@ -53,18 +62,6 @@ public class Pergunta {
             System.out.println(alternativas.get(numeroEscolhido).getDescricao());
         }
     }
-
-//    public int Pontos_Dificuldade(String dificuldade) {
-//        switch (dificuldade) {
-//            case "Facil":
-//                return 5;
-//            case "Medio":
-//                return 10;
-//            case "Dificil":
-//                return 15;
-//        }
-//        return 0;
-//    }
 
     public Dificuldade getDificuldade() {
         return this.dificuldade;
